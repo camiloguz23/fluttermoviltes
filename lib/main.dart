@@ -1,30 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final WebViewController _controller =
-      WebViewController()
-        ..setJavaScriptMode(JavaScriptMode.unrestricted)
-        ..clearCache()
-        ..loadRequest(
-          Uri.parse('https://fimentes-web.vercel.app'),
-          headers: {
-            'Cache-Control': 'no-cache, no-store, must-revalidate',
-            'Pragma': 'no-cache',
-            'Expires': '0',
-          },
-        );
+  final String initialUrl = 'https://fimentes-web.vercel.app';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "page Test movil",
+      title: "Page Test Móvil",
       home: Scaffold(
-        body: SafeArea(child: WebViewWidget(controller: _controller)),
+        body: SafeArea(
+          child: InAppWebView(
+            initialUrlRequest: URLRequest(
+              url: WebUri.uri(Uri.parse(initialUrl)),
+            ),
+            initialSettings: InAppWebViewSettings(
+              javaScriptEnabled: true,
+              cacheEnabled: false,
+              useOnDownloadStart: true,
+              mediaPlaybackRequiresUserGesture: false,
+            ),
+            onWebViewCreated: (controller) {
+              // Puedes almacenar el controlador si necesitas interactuar con el WebView más adelante
+            },
+            onDownloadStartRequest: (controller, url) async {
+              // Maneja la descarga de archivos aquí
+            },
+          ),
+        ),
       ),
     );
   }

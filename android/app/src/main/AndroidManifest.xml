@@ -28,6 +28,17 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Dominio principal -->
+                <data android:scheme="https" android:host="fimentes-web.vercel.app" />
+                
+                <!-- Dominio de Supabase -->
+                <data android:scheme="https" android:host="jauwkrflaaoszxokctsw.supabase.co" />
+            </intent-filter>
         </activity>
 
         <provider
