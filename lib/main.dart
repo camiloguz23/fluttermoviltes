@@ -6,7 +6,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final String initialUrl = 'https://fimentes-web.vercel.app';
+  static const String initialUrl = 'https://linktest-alpha.vercel.app';
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         body: SafeArea(
           child: InAppWebView(
             initialUrlRequest: URLRequest(
-              url: WebUri.uri(Uri.parse(initialUrl)),
+              url: WebUri(initialUrl),
             ),
             initialSettings: InAppWebViewSettings(
               javaScriptEnabled: true,
@@ -25,10 +25,10 @@ class MyApp extends StatelessWidget {
               mediaPlaybackRequiresUserGesture: false,
             ),
             onWebViewCreated: (controller) {
-              // Puedes almacenar el controlador si necesitas interactuar con el WebView más adelante
+              print("🌍 WebView creada con URL: $initialUrl");
             },
             onDownloadStartRequest: (controller, url) async {
-              // Maneja la descarga de archivos aquí
+              print("📥 Descarga iniciada: $url");
             },
           ),
         ),
